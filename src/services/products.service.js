@@ -1,3 +1,5 @@
+/*
+import * as productModel from "../models/products.model.js"
 const products= [
     {id:1, nombre: "producto 1", price: 1000},
     {id:2, nombre: 'producto 2', price: 2000},
@@ -11,13 +13,13 @@ const products= [
     {id:10, nombre: "producto 10", price: 10000}
 ]
 const notFound="Recurso no encontrado"
-
+ 
 export const getAllProducts= ()=>{
     return products
 }
 
 export const getProductById= (id)=>{
-    return products.find(product=>product.id===id)
+    return productModel.getProductById(id)
 }
 
 export const createProduct= (productData)=>{
@@ -28,7 +30,7 @@ export const createProduct= (productData)=>{
     }
     products.push(newProduct)
     return newProduct
-}
+} 
 
 export const deleteProduct= (id)=>{
     const deletedProduct= products.find(product=>product.id==id)
@@ -36,3 +38,4 @@ export const deleteProduct= (id)=>{
     products.splice(productIndex,1)
     return deletedProduct
 }
+*/

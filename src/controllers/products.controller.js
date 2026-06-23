@@ -1,43 +1,44 @@
 import * as productsService from "../services/products.service.js"
-
+import * as productsModel from "../models/products.model.js"
 const notFound="Recurso no encontrado"
 
 
 export const getAllProducts= async (req,res)=>{
-    res.status(200).json(productsService.getAllProducts())
+    const products= await productsModel.getAllProducts()
+    if (!products){
+        res.status(500).json({message:"fallamos"})
+    }
+    res.status(200).json(products)
 }
 
-export const getProductById= (req,res)=>{
-    const reqId= Number(req.params.id)
-    if (reqId ===0){
-        return res.status(404).json({message: notFound})
-    }
-    const findedProduct= productsService.getProductById(reqId)
+export const getProductById= async (req,res)=>{
+    const id= req.params.id
+    const findedProduct= await productsModel.getProductById(id)
     if  (!findedProduct){
         return res.status(404).json({message: notFound})
     }
     res.status(200).json({producto: findedProduct})
+    console.log(findedProduct)
 }
 
-export const createProduct= (req,res)=>{
-    const {name, price}= req.body
-    if (!name || !price){
+export const createProduct= async (req,res)=>{
+    const {name, price, origin, stock}= req.body
+    if (!name || !price || !origin || !stock){
         return res.status(400).json({message: "Información faltante"})
     }
-    const createdProduct= productsService.createProduct({name,price})
+    const createdProduct= await productsModel.createProduct({name, price, origin, stock})
     res.status(201).json({
-        message:`Producto: ${createdProduct.name}, precio: ${createdProduct.price} creado exitosamente`
+        message:"Creado exitosamente",
+        creado:createdProduct
     })
 }
 
-export const deleteProduct= (req,res)=>{
-    const reqId= Number(req.params.id)
-    if (isNaN(reqId)){
-        return res.status(400).json({message:"id no existe"})
-    }
-    const deletedProduct= productsService.deleteProduct(reqId)
-    if (!deleteProduct){
+export const deleteProduct= async (req,res)=>{
+    const id= req.params.id
+    const deletedProduct= await productsModel.deleteProduct(id)
+    if (!deletedProduct){
         return res.status(404).json({message: notFound})
     }
-    res.status(200).json({eliminado: deletedProduct})
+    res.status(200).json({message: "Eliminado exitosamente",
+        eliminado: deletedProduct})
 }

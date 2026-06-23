@@ -4,7 +4,7 @@ import { getAllProducts,getProductById,createProduct,deleteProduct } from "../co
 const router= Router()
 
 //GET - traer todos los productos
-router.get("/products",getAllProducts)
+router.get("/products", getAllProducts)
 //GET - traer producto por ID
 router.get("/products/:id", getProductById)
 //POST - crear producto

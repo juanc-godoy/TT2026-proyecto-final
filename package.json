@@ -22,6 +22,8 @@
   "homepage": "https://github.com/juanc-godoy/TT2026-proyecto-final#readme",
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "firebase": "^12.15.0"
   }
 }

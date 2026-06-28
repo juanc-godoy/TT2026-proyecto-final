@@ -1,15 +1,16 @@
 import { Router } from "express";
 import { getAllProducts,getProductById,createProduct,deleteProduct } from "../controllers/products.controller.js";
+import { auth } from "../middlewares/auth.middlewares.js"
 
 const router= Router()
 
 //GET - traer todos los productos
-router.get("/products", getAllProducts)
+router.get("/", getAllProducts)
 //GET - traer producto por ID
-router.get("/products/:id", getProductById)
+router.get("/:id", getProductById)
 //POST - crear producto
-router.post("/products/create",createProduct)
+router.post("/create", auth, createProduct)
 //DELETE - eliminar producto
-router.delete("/products/:id", deleteProduct)
+router.delete("/:id", auth, deleteProduct)
 
 export default router

@@ -1,4 +1,5 @@
 const validLogin={
+    id= 1,
     user: "admin",
     pass: "superSafePass"
 }

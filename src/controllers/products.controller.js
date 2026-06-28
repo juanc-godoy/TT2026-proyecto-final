@@ -1,12 +1,12 @@
-import * as productsService from "../services/products.service.js"
 import * as productsModel from "../models/products.model.js"
-const notFound="Recurso no encontrado"
 
+const notFound="Recurso no encontrado"
+const missing="Todos los campos son obligatorios"
 
 export const getAllProducts= async (req,res)=>{
     const products= await productsModel.getAllProducts()
     if (!products){
-        res.status(500).json({message:"fallamos"})
+        res.status(500).json({message: "Fallo al comunicar con el servidor"})
     }
     res.status(200).json(products)
 }
@@ -24,12 +24,12 @@ export const getProductById= async (req,res)=>{
 export const createProduct= async (req,res)=>{
     const {name, price, origin, stock}= req.body
     if (!name || !price || !origin || !stock){
-        return res.status(400).json({message: "Información faltante"})
+        return res.status(400).json({message: missing})
     }
     const createdProduct= await productsModel.createProduct({name, price, origin, stock})
     res.status(201).json({
-        message:"Creado exitosamente",
-        creado:createdProduct
+        message: "Creado exitosamente",
+        creado: createdProduct
     })
 }
 

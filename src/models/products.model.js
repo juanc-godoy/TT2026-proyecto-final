@@ -54,3 +54,11 @@ export const deleteProduct= async(id)=>{
     await deleteDoc(productRef)
     return deletedProduct
 }
+/* 
+export const updateProduct= async (id)=>{
+    const productRef= doc(productsCollection,id)
+    const snapshot= await getDoc(productRef)
+    if (!snapshot.exists()){
+        return null
+    }
+} */

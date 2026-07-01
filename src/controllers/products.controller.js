@@ -42,3 +42,16 @@ export const deleteProduct= async (req,res)=>{
     res.status(200).json({message: "Eliminado exitosamente",
         eliminado: deletedProduct})
 }
+
+export const updateProduct= async (req,res)=>{
+    const id= req.params.id
+    const {name, price, origin, stock}= req.body
+    if (!name || !price || !origin || !stock){
+        return res.status(400).json({message: missing})
+    }
+    const updatedProduct= await productsModel.updateProduct(id,{name, price, origin, stock})
+    res.status(201).json(
+        {message:"Creado exitosamente",
+        product: updatedProduct
+    })
+}
